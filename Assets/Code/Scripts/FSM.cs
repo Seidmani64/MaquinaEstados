@@ -34,6 +34,7 @@ public class FSM : MonoBehaviour
     public bool tookDamage = false;
     public float elapsedEvadeTime;
     public float evadeTime = 3.0f;
+    public Vector3 escapePoint;
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +81,10 @@ public class FSM : MonoBehaviour
 
     void UpdatePatrol()
     {
+        print("Distance: " + Vector3.Distance(transform.position, destPos));
+        print("patrol radius: " + patrolRadius);
+        print("Distance: " + Vector3.Distance(transform.position, playerTransform.position));
+        print("patrol radius: " + chaseRadius);
         //Find another random patrol point if the current point is reached
         if (Vector3.Distance(transform.position, destPos) <= patrolRadius) 
         {
@@ -123,6 +128,11 @@ public class FSM : MonoBehaviour
         if(tookDamage)
         {
             tookDamage = false;
+            int evadeDir = Random.Range(0,1);
+            if(evadeDir == 0)
+                escapePoint = new Vector3(transform.position.x + Random.Range(10,15), 0, transform.position.z + Random.Range(5,10));
+            else
+                escapePoint = new Vector3(transform.position.x - Random.Range(10,15), 0, transform.position.z + Random.Range(5,10));
             print("Switch to Evade state");
             currentState = FSMStates.Evade;
         }
@@ -168,18 +178,12 @@ public class FSM : MonoBehaviour
         }
         else
         {
-            int evadeDir = Random.Range(0,1);
-            if(evadeDir == 0)
-            {
-                Quaternion targetRotation = Quaternion.Euler(-45f, 0, 0);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
-            }
-            else
-            {
-                Quaternion targetRotation = Quaternion.Euler(-45f, 0, 0);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
-            }
+            elapsedEvadeTime += Time.deltaTime;
+            Quaternion targetRotation = Quaternion.LookRotation(transform.position - escapePoint);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+            transform.Translate(Vector3.forward * Time.deltaTime * curSpeed);
         }
+        
     }
 
     void OnCollisionEnter(Collision col)
