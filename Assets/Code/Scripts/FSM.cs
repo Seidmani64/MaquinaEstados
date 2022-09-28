@@ -29,6 +29,11 @@ public class FSM : MonoBehaviour
     public float chaseRadius = 25f;
     public float AttackRadius = 20f;
     private int index = -1;
+    public float aimTime = 1.0f;
+    public float elapsedAimTime;
+    public bool tookDamage = false;
+    public float elapsedEvadeTime;
+    public float evadeTime = 3.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +50,10 @@ public class FSM : MonoBehaviour
 
     void Update()
     {
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
         switch(currentState)
         {
             case FSMStates.Patrol:
@@ -94,22 +103,92 @@ public class FSM : MonoBehaviour
 
     void UpdateChase()
     {
-
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
+        if(distance <= AttackRadius)
+        {
+            print("Switch to Aim state");
+            currentState = FSMStates.Aim;
+        }
+        else if (distance >= chaseRadius) 
+        {
+            print("Switch to Patrol state");
+            currentState = FSMStates.Patrol;
+        }
+        else if(distance <= chaseRadius)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(playerTransform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+            transform.Translate(Vector3.forward * Time.deltaTime * curSpeed);
+        }
+        if(tookDamage)
+        {
+            tookDamage = false;
+            print("Switch to Evade state");
+            currentState = FSMStates.Evade;
+        }
     }
 
     void UpdateAim()
     {
-
+        if(elapsedAimTime < aimTime)
+        {
+            elapsedAimTime += Time.deltaTime;
+            Quaternion targetRotation = Quaternion.LookRotation(playerTransform.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+        }
+        else
+        {
+            elapsedAimTime = 0f;
+            print("Switch to Shoot state");
+            currentState = FSMStates.Shoot;
+        }
+        
     }
 
     void UpdateShoot()
     {
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= shootRate) 
+        {
+            //Reset the time
+            elapsedTime = 0.0f;
 
+            Instantiate(bullet, bulletSpawnPoint.transform.position, bulletSpawnPoint.transform.rotation);
+            print("Switch to Chase state");
+            currentState = FSMStates.Chase;
+        }
     }
 
     void UpdateEvade()
     {
+        if(elapsedEvadeTime >= evadeTime)
+        {
+            print("Switch to Chase state");
+            currentState = FSMStates.Chase;
+        }
+        else
+        {
+            int evadeDir = Random.Range(0,1);
+            if(evadeDir == 0)
+            {
+                Quaternion targetRotation = Quaternion.Euler(-45f, 0, 0);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+            }
+            else
+            {
+                Quaternion targetRotation = Quaternion.Euler(-45f, 0, 0);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotSpeed);
+            }
+        }
+    }
 
+    void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.tag == "Bullet")
+        {
+            health -= col.gameObject.GetComponent<BulletController>().damage;
+            tookDamage = true;
+        }
     }
 
     private void FixedUpdate() 
