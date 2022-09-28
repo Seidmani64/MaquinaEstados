@@ -81,10 +81,6 @@ public class FSM : MonoBehaviour
 
     void UpdatePatrol()
     {
-        print("Distance: " + Vector3.Distance(transform.position, destPos));
-        print("patrol radius: " + patrolRadius);
-        print("Distance: " + Vector3.Distance(transform.position, playerTransform.position));
-        print("patrol radius: " + chaseRadius);
         //Find another random patrol point if the current point is reached
         if (Vector3.Distance(transform.position, destPos) <= patrolRadius) 
         {
@@ -128,11 +124,18 @@ public class FSM : MonoBehaviour
         if(tookDamage)
         {
             tookDamage = false;
-            int evadeDir = Random.Range(0,1);
-            if(evadeDir == 0)
-                escapePoint = new Vector3(transform.position.x + Random.Range(10,15), 0, transform.position.z + Random.Range(5,10));
-            else
+            int xSign = (int)Mathf.Sign(playerTransform.position.x - transform.position.x);
+            int zSign = (int)Mathf.Sign(playerTransform.position.z - transform.position.z);
+            print("xSign is: " + xSign);
+            print("zSign is: " + zSign);
+            if(xSign == -1 && zSign == 1)
                 escapePoint = new Vector3(transform.position.x - Random.Range(10,15), 0, transform.position.z + Random.Range(5,10));
+            else if(xSign == 1 && zSign == 1)
+                escapePoint = new Vector3(transform.position.x + Random.Range(10,15), 0, transform.position.z + Random.Range(5,10));
+            else if(xSign == -1 && zSign == -1)
+                escapePoint = new Vector3(transform.position.x - Random.Range(10,15), 0, transform.position.z - Random.Range(5,10));
+            else if(xSign == 1 && zSign == -1)
+                escapePoint = new Vector3(transform.position.x + Random.Range(10,15), 0, transform.position.z - Random.Range(5,10));
             print("Switch to Evade state");
             currentState = FSMStates.Evade;
         }

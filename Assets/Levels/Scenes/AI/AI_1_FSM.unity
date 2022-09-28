@@ -440,12 +440,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: rotSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: chaseRadius
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: AttackRadius
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: patrolRadius
@@ -486,6 +490,10 @@ PrefabInstance:
     - target: {fileID: 1408931184496023015, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: m_Name
       value: Enemy_Tank (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408931184496023015, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2271679292463979608, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: m_Name
@@ -1275,12 +1283,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: rotSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: chaseRadius
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: AttackRadius
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: patrolRadius
@@ -1598,12 +1610,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: rotSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: chaseRadius
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: AttackRadius
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: patrolRadius
@@ -1644,6 +1660,10 @@ PrefabInstance:
     - target: {fileID: 1408931184496023015, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: m_Name
       value: Enemy_Tank (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408931184496023015, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2271679292463979608, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: m_Name
@@ -1711,12 +1731,16 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: rotSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: chaseRadius
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: AttackRadius
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 609882092076672938, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: patrolRadius
@@ -1757,6 +1781,10 @@ PrefabInstance:
     - target: {fileID: 1408931184496023015, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: m_Name
       value: Enemy_Tank (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1408931184496023015, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2271679292463979608, guid: 8ed347b4b597ab14db52af191bcf71b5, type: 3}
       propertyPath: m_Name
